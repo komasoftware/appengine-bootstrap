@@ -1,0 +1,6 @@
+rootProject.name = 'appengine-bootstrap'
+
+include ':com.company.appengine.modules.ear'
+include ':com.company.core'
+include ':com.company.endpoints'
+

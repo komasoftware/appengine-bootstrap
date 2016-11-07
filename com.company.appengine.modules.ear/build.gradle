@@ -1,0 +1,31 @@
+apply plugin: 'ear'
+apply plugin: 'java'
+apply plugin: 'appengine'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.32'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.32'
+    deploy project(path: ':com.company.endpoints', configuration: 'archives')
+}
+
+appengine {
+    httpPort = 8888
+    downloadSdk = true
+
+    appcfg {
+        oauth2 = true
+    }
+}

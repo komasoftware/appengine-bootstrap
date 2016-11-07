@@ -1,0 +1,10 @@
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':com.company.core')
+    compile group: 'com.google.endpoints', name: 'endpoints-framework', version: '2.0.0-beta.9'
+}
