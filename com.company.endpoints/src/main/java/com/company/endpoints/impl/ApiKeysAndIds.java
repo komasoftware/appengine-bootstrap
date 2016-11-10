@@ -1,4 +1,4 @@
-package com.company.endpoints;
+package com.company.endpoints.impl;
 
 /**
  * This contains all the Api keys and Ids needed for Endpoints

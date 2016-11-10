@@ -1,9 +1,13 @@
-package com.company.endpoints;
+package com.company.endpoints.impl;
 
 import com.company.core.Example;
+import com.company.database.ExampleService;
+import com.company.endpoints.wrapper.Examples;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.api.server.spi.config.Named;
+import com.google.inject.Inject;
 
 import java.util.logging.Logger;
 
@@ -19,8 +23,13 @@ import java.util.logging.Logger;
         audiences = {ApiKeysAndIds.AUDIENCE_ID}
 )
 public class ExampleEndpoint {
-
     private static final Logger LOG = Logger.getLogger(ExampleEndpoint.class.getName());
+    private final ExampleService exampleService;
+
+    @Inject
+    public ExampleEndpoint(ExampleService exampleService) {
+        this.exampleService = exampleService;
+    }
 
     /**
      * Gets an example
@@ -28,7 +37,21 @@ public class ExampleEndpoint {
      * @return the example
      */
     @ApiMethod(httpMethod = "GET", path = "example")
-    public Example example() {
-        return new Example("toto");
+    public Example example(@Named("name") String name) {
+        Example example = new Example(name);
+        exampleService.saveExample(example);
+        return example;
+    }
+
+    /**
+     * Gets all example
+     *
+     * @return the list of example
+     */
+    @ApiMethod(httpMethod = "GET", path = "examples")
+    public Examples getAllExamples() {
+        Examples examples = new Examples();
+        examples.setExamples(exampleService.getAllExamples());
+        return examples;
     }
 }

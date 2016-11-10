@@ -9,6 +9,13 @@ public class Example {
 
     /**
      * Constructs an Example
+     */
+    public Example() {
+        this.name = "";
+    }
+
+    /**
+     * Constructs an Example
      *
      * @param name
      */
