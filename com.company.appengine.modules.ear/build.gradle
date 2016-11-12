@@ -29,3 +29,17 @@ appengine {
         oauth2 = true
     }
 }
+
+/**
+ * This task will automatically update your appId defined in src/main/application/META-INF/appengine-application.xml
+ * This task must run after appengineExplodeApp and before appengineUpdate
+ */
+task updateAppId << {
+    copy {
+        from 'src/main/application/META-INF'
+        into 'build/exploded-app/META-INF'
+        expand 'appId': "${appId}";
+    }
+}
+updateAppId.mustRunAfter appengineExplodeApp
+appengineUpdate.dependsOn updateAppId
