@@ -1,5 +1,6 @@
 package com.company.endpoints.impl;
 
+import com.company.cache.CacheService;
 import com.company.core.Example;
 import com.company.database.ExampleService;
 import com.company.emails.EmailExample;
@@ -27,11 +28,14 @@ public class ExampleEndpoint {
     private static final Logger LOG = Logger.getLogger(ExampleEndpoint.class.getName());
     private final ExampleService exampleService;
     private final EmailExample emailExample;
+    private final CacheService cacheService;
 
     @Inject
-    public ExampleEndpoint(ExampleService exampleService, EmailExample emailExample) {
+    public ExampleEndpoint(ExampleService exampleService, EmailExample emailExample,
+                           CacheService cacheService) {
         this.exampleService = exampleService;
         this.emailExample = emailExample;
+        this.cacheService = cacheService;
     }
 
     /**
@@ -66,5 +70,27 @@ public class ExampleEndpoint {
     @ApiMethod(httpMethod = "POST", path = "emails")
     public void sendTestEmail(@Named("email") String email) {
         emailExample.sendTestEmail(email);
+    }
+
+    /**
+     * Sets value to the cache
+     *
+     * @param id    the id of the value
+     * @param value the value to cache
+     */
+    @ApiMethod(httpMethod = "POST", path = "cache")
+    public void putCache(@Named("id") String id, @Named("value") String value) {
+        cacheService.putCache(id, value);
+    }
+
+    /**
+     * Gets value from the cache
+     *
+     * @return the example
+     */
+    @ApiMethod(httpMethod = "GET", path = "cache")
+    public Example getCache(@Named("id") String id) {
+        Example example = new Example(cacheService.getCache(id));
+        return example;
     }
 }

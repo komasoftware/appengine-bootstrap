@@ -5,6 +5,8 @@ repositories {
 }
 
 dependencies {
+    compile project(':com.company.cache')
+    compile project(':com.company.cache.memcache')
     compile project(':com.company.core')
     compile project(':com.company.database')
     compile project(':com.company.database.clouddatastore')

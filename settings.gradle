@@ -1,6 +1,8 @@
 rootProject.name = 'appengine-bootstrap'
 
 include ':com.company.appengine.modules.ear'
+include ':com.company.cache'
+include ':com.company.cache.memcache'
 include ':com.company.core'
 include ':com.company.database'
 include ':com.company.database.clouddatastore'
