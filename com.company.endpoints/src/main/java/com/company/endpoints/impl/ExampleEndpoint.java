@@ -2,6 +2,7 @@ package com.company.endpoints.impl;
 
 import com.company.core.Example;
 import com.company.database.ExampleService;
+import com.company.emails.EmailExample;
 import com.company.endpoints.wrapper.Examples;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -25,10 +26,12 @@ import java.util.logging.Logger;
 public class ExampleEndpoint {
     private static final Logger LOG = Logger.getLogger(ExampleEndpoint.class.getName());
     private final ExampleService exampleService;
+    private final EmailExample emailExample;
 
     @Inject
-    public ExampleEndpoint(ExampleService exampleService) {
+    public ExampleEndpoint(ExampleService exampleService, EmailExample emailExample) {
         this.exampleService = exampleService;
+        this.emailExample = emailExample;
     }
 
     /**
@@ -53,5 +56,15 @@ public class ExampleEndpoint {
         Examples examples = new Examples();
         examples.setExamples(exampleService.getAllExamples());
         return examples;
+    }
+
+    /**
+     * Sends a test email
+     *
+     * @param email the email address
+     */
+    @ApiMethod(httpMethod = "POST", path = "emails")
+    public void sendTestEmail(@Named("email") String email) {
+        emailExample.sendTestEmail(email);
     }
 }

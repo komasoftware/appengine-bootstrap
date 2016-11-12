@@ -2,6 +2,8 @@ package com.company.endpoints.util;
 
 import com.company.database.ExampleService;
 import com.company.database.clouddatastore.ExampleServiceImpl;
+import com.company.emails.EmailExample;
+import com.company.emails.impl.EmailExampleImpl;
 import com.company.endpoints.impl.ExampleEndpoint;
 import com.google.api.server.spi.guice.EndpointsModule;
 import com.google.common.collect.ImmutableList;
@@ -14,6 +16,7 @@ public class CustomEndpointsModule extends EndpointsModule {
     @Override
     public void configureServlets() {
         bind(ExampleService.class).toInstance(new ExampleServiceImpl());
+        bind(EmailExample.class).toInstance(new EmailExampleImpl());
 
         /* List all your endpoints here */
         ImmutableList endpointsList = ImmutableList.of(

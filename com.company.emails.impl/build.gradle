@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':com.company.emails')
+    compile 'com.google.appengine:appengine-api-1.0-sdk:1.9.32'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

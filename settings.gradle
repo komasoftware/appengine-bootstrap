@@ -4,5 +4,7 @@ include ':com.company.appengine.modules.ear'
 include ':com.company.core'
 include ':com.company.database'
 include ':com.company.database.clouddatastore'
+include ':com.company.emails'
+include ':com.company.emails.impl'
 include ':com.company.endpoints'
 
