@@ -7,6 +7,7 @@ import com.company.database.clouddatastore.ExampleServiceImpl;
 import com.company.emails.EmailExample;
 import com.company.emails.impl.EmailExampleImpl;
 import com.company.endpoints.impl.ExampleEndpoint;
+import com.company.endpoints.impl.ExampleWithAuthEndpoint;
 import com.google.api.server.spi.guice.EndpointsModule;
 import com.google.common.collect.ImmutableList;
 
@@ -31,7 +32,8 @@ public class CustomEndpointsModule extends EndpointsModule {
 
         /* List all your endpoints here */
         ImmutableList endpointsList = ImmutableList.of(
-                ExampleEndpoint.class);
+                ExampleEndpoint.class,
+                ExampleWithAuthEndpoint.class);
 
         configureEndpoints("/_ah/api/*", endpointsList);
     }

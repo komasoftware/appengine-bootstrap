@@ -14,6 +14,7 @@ dependencies {
     compile project(':com.company.emails.impl')
     compile group: 'com.google.endpoints', name: 'endpoints-framework', version: '2.0.0-beta.9'
     compile group: 'com.google.endpoints', name: 'endpoints-framework-guice', version: '2.0.0-beta.8'
+    compile group: 'com.google.firebase', name: 'firebase-admin', version: '4.0.2'
 }
 
 war {
